@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="./vue.js"></script>
+    <title>VUE.JS :: Hook de style</title>
+  </head>
+  <body>
+    <div id="app">
+      <p :class="[display, {ativo: estaAtivo}]">
+        Esse texto ficará verde quando ativado!
+      </p>
+      <button @click="estaAtivo = !estaAtivo">Ativar / Desativar</button>
+
+      <p :style="{fontSize: tamanho + 'px'}">diretiva :style</p>
+      <button @click="tamanho++">Aumentar</button>
+    </div>
+
+    <script>
+      const vm = new Vue({
+        el: "#app",
+        data: {
+          estaAtivo: false,
+          display: "defineDisplay",
+          tamanho: 16,
+        },
+      });
+    </script>
+
+    <style>
+      .ativo {
+        color: green;
+        font-weight: bolder;
+      }
+      .defineDisplay {
+        display: inline;
+        border: 2px solid black;
+        padding: 2px;
+      }
+    </style>
+  </body>
+</html>

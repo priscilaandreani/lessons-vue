@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vue JS - V-FOR</title>
+    <script src="./vue.js"></script>
+  </head>
+  <body>
+    <!-- Objeto 01 :: Simples
+    <div id="app">
+      <ul>
+        <li v-for="(valor, key, index) in estados">
+          <p>{{valor.nome}}</p>
+          <p>{{valor.populacao}}</p>
+        </li>
+      </ul>
+    </div>
+    -->
+
+    <!-- Objeto 02: ES6 :: desestruturação do objeto -->
+    <div id="app">
+      <h2>Objeto desestruturado (ES6)</h2>
+      <ul>
+        <li v-for="({nome, populacao}, key, index) in estados" :key="key">
+          <p>Nome: {{nome}}</p>
+          <p>População: {{populacao}}</p>
+          <p>ID: {{key}}</p>
+          <p>Index: {{index}}</p>
+        </li>
+      </ul>
+
+      <h2>Iteração <em>n in 10</em></h2>
+      <div v-for="n in 10">
+        <ul>
+          <li>{{n}}</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Array e reatividade -->
+
+    <div id="app2">
+      <h2>Array e Reatividade</h2>
+      <ul>
+        <li v-for="item in lista">{{item}}</li>
+      </ul>
+      <button @click="removerItem">Remover Item</button>
+      <button @click="modificarItem">Modificar Item</button>
+    </div>
+
+    <script>
+      const vm = new Vue({
+        el: "#app",
+        data: {
+          estados: {
+            sp: {
+              populacao: "45 milhões",
+              nome: "São Paulo",
+            },
+            mg: {
+              populacao: "21 milhões",
+              nome: "Minas Gerais",
+            },
+            rj: {
+              populacao: "17 milhões",
+              nome: "Rio de Janeiro",
+            },
+          },
+        },
+      });
+
+      const vm2 = new Vue({
+        el: "#app2",
+        data: {
+          lista: ["Item 01", "Item 02", "Item 03"],
+        },
+        methods: {
+          removerItem() {
+            this.lista.pop();
+          },
+          modificarItem() {
+            this.$set(this.lista, 0, "Banana");
+          },
+        },
+      });
+    </script>
+  </body>
+</html>

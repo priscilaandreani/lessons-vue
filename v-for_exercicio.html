@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vue JS - V-FOR: Exercício</title>
+    <script src="./vue.js"></script>
+  </head>
+  <body>
+    <!--
+    Utilizando a api:
+    https://viacep.com.br/ws/04551010/json/
+    Mostre o cep, logradouro, complemento, bairro, localidade e uf do que for retornado.
+  -->
+
+    <div id="app">
+      <button @click="consultarCep">Consultar CEP</button>
+      <ul v-for="(dados, key) in local">
+        <li>{{key}}: {{dados}}</li>
+      </ul>
+    </div>
+
+    <script>
+      const vm = new Vue({
+        el: "#app",
+        data: {
+          local: "",
+        },
+        methods: {
+          consultarCep() {
+            fetch("https://viacep.com.br/ws/04551010/json/")
+              .then((r) => r.json())
+              .then((r) => {
+                this.local = r;
+              });
+          },
+        },
+      });
+    </script>
+  </body>
+</html>
